@@ -56,6 +56,19 @@ public class firstTest {
         waitElement(By.xpath("//*[contains(@class, 'android.view.ViewGroup')]"), ERROR_MESSAGE_NOT_FIND_ARTICLES);
         element.clear();
         waitElement(By.id("org.wikipedia:id/search_empty_image"), ERROR_MESSAGE_NOT_FIND_SEARCH_IMAGE);
+    }
+
+    @Test
+    void searchWordAndCheckAnswer() {
+        onboardingSkip();
+        waitElementAndTap(By.xpath("//*[contains(@text,'Search Wikipedia')]"), ERROR_MESSAGE_SEARCH_WIKIPEDIA);
+        WebElement element = waitElementAndSendKeys(By.id("org.wikipedia:id/search_src_text"), "Java", ERROR_MESSAGE_NOT_FIND_INPUT);
+        waitElement(By.xpath("//*[contains(@text,'Java')]"), ERROR_MESSAGE_NOT_FIND_ARTICLES);
+        waitElement(By.xpath("//*[contains(@text,'JavaScript')]"), ERROR_MESSAGE_NOT_FIND_ARTICLES);
+        waitElement(By.xpath("//*[contains(@text,'Java (programming language)')]"), ERROR_MESSAGE_NOT_FIND_ARTICLES);
+        waitElement(By.xpath("//*[contains(@text,'Java version history')]"), ERROR_MESSAGE_NOT_FIND_ARTICLES);
+        element.clear();
+        waitElement(By.id("org.wikipedia:id/search_empty_image"), ERROR_MESSAGE_NOT_FIND_SEARCH_IMAGE);
 
     }
 

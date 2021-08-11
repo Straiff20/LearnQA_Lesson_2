@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="firstTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-11T16:33:03" hostname="NB-845ABA" time="7.624">
+<testsuite name="firstTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-11T17:19:58" hostname="NB-845ABA" time="7.977">
   <properties/>
-  <testcase name="searchWordCheckAndClear()" classname="firstTest" time="7.624"/>
+  <testcase name="searchWordAndCheckAnswer()" classname="firstTest" time="7.977"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[авг 11, 2021 7:33:03 PM io.appium.java_client.remote.AppiumCommandExecutor$1 lambda$0
+  <system-err><![CDATA[авг 11, 2021 8:19:58 PM io.appium.java_client.remote.AppiumCommandExecutor$1 lambda$0
 INFO: Detected dialect: W3C
 ]]></system-err>
 </testsuite>
