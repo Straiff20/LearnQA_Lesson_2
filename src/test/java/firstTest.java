@@ -4,6 +4,7 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import javafx.scene.web.WebView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +19,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class firstTest {
 
@@ -35,7 +38,7 @@ public class firstTest {
         dc.setCapability("platformName", "Android");
         dc.setCapability("appPackage", "org.wikipedia");
         dc.setCapability("appActivity", ".main.MainActivity");
-        dc.setCapability("app", "C:\\Users\\pliyev.ilya\\IdeaProjects\\JavaAppiumAutomation\\apks\\org.wikipedia.apk");
+        dc.setCapability("app", "/Users/pliyevilya/Desktop/Projects/LearnQA_Lesson_2/apks/org.wikipedia.apk");
 
         ad = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), dc);
     }
@@ -102,7 +105,7 @@ public class firstTest {
 
     @Test
     void saveTwoArticlesTest() {
-        onboardingSkip();
+       onboardingSkip();
 
         String xpathToSearchWikipedia = "//*[contains(@text,'Search Wikipedia')]";
         waitElementAndTap(By.xpath(xpathToSearchWikipedia), ERROR_MESSAGE_NOT_FIND_ELEMENT + xpathToSearchWikipedia);
@@ -179,10 +182,34 @@ public class firstTest {
         assertEquals(quantityArticle_After_Swipe, quantityArticle_Before_Swipe - 1, "Not right quantity Articles");
     }
 
+    @Test
+    void assertTitleTest(){
+        onboardingSkip();
+
+        String xpathToSearchWikipedia = "//*[contains(@text,'Search Wikipedia')]";
+        waitElementAndTap(By.xpath(xpathToSearchWikipedia), ERROR_MESSAGE_NOT_FIND_ELEMENT + xpathToSearchWikipedia);
+
+        String xpathToSearchInput = "org.wikipedia:id/search_src_text";
+        waitElementAndSendKeys(By.id(xpathToSearchInput), "Java", ERROR_MESSAGE_NOT_FIND_ELEMENT + xpathToSearchInput);
+
+        String xpathToFirstArticle = "//*[contains(@text, 'Java (programming language)')]";
+        waitElementAndTap(By.xpath(xpathToFirstArticle), ERROR_MESSAGE_NOT_FIND_ELEMENT + xpathToFirstArticle);
+
+        String textArticle = "//*[@text='Indonesian island']";
+        waitElement(By.xpath(textArticle), ERROR_MESSAGE_NOT_FIND_ELEMENT + textArticle);
+
+        assertNotNull(getTitleInWebWiewPage());
+    }
+
+    private String getTitleInWebWiewPage() {
+        ad.getContextHandles();
+        ad.context("WEBVIEW");
+        return ad.getTitle();
+    }
+
     private void onboardingSkip() {
-        ad.findElement(By.id("org.wikipedia:id/primaryTextView")).isDisplayed();
-        TouchAction touchAction = new TouchAction(ad);
-        touchAction.tap(PointOption.point(108, 1715)).perform();
+        String skipButton = "org.wikipedia:id/fragment_onboarding_skip_button";
+        waitElementAndTap(By.id(skipButton), ERROR_MESSAGE_NOT_FIND_ELEMENT + skipButton);
     }
 
     private void touchDisplay() {
@@ -273,7 +300,6 @@ public class firstTest {
         List elements = ad.findElements(by);
         return elements.size();
     }
-
 
     private String waitForElementAndGetAttribute(By by, String attribute, String errorMessage, long timeOutInSeconds) {
         WebElement element = waitElement(by, errorMessage, timeOutInSeconds);
