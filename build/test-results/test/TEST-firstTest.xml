@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="firstTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-10T13:08:21" hostname="MacBook-Pro-Ivan-2.local" time="13.929">
-  <properties/>
-  <testcase name="assertTitleTest()" classname="firstTest" time="13.929"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[сен 10, 2021 4:08:27 PM io.appium.java_client.remote.AppiumCommandExecutor$1 lambda$0
-INFO: Detected dialect: W3C
-]]></system-err>
-</testsuite>
