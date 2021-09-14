@@ -1,6 +1,7 @@
 import Lib.CoreTestCase;
 import Lib.ui.MainPageObject;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ public class testSearch extends CoreTestCase {
     private static final String ERROR_MESSAGE_NOT_FIND_ELEMENT = "Cannot find Element" + "\n";
     private MainPageObject MainPageObject;
 
+    @BeforeEach
     protected void setUp() throws Exception {
         super.setUp();
 
@@ -163,7 +165,7 @@ public class testSearch extends CoreTestCase {
         String xpathToFirstArticle = "//*[contains(@text, 'Java (programming language)')]";
         MainPageObject.waitElementAndTap(By.xpath(xpathToFirstArticle), ERROR_MESSAGE_NOT_FIND_ELEMENT + xpathToFirstArticle);
 
-        String textArticle = "//*[@text='Indonesian island']";
+        String textArticle = "//*[@text='Java']";
         MainPageObject.waitElement(By.xpath(textArticle), ERROR_MESSAGE_NOT_FIND_ELEMENT + textArticle);
 
         Assertions.assertNotNull(MainPageObject.getTitleInWebWiewPage());
