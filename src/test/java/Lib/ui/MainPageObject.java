@@ -21,7 +21,7 @@ public class MainPageObject {
         this.ad = ad;
     }
 
-    public String getTitleInWebWiewPage() {
+    public String getAndCheckTitleOfArticle() {
         ad.getContextHandles();
         ad.context("WEBVIEW");
         return ad.getTitle();
@@ -37,31 +37,40 @@ public class MainPageObject {
         touchAction.tap(PointOption.point(570, 1));
     }
 
-    public WebElement waitElement(By by, String errorMessage, long timeInSecond) {
+    public WebElement waitElementPresent(By by, String errorMessage, long timeInSecond) {
         WebDriverWait wait = new WebDriverWait(ad, timeInSecond);
         wait.withMessage(errorMessage + "\n");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
-
     }
 
-    public WebElement waitElement(By by, String errorMessage) {
-        return waitElement(by, errorMessage, 10);
+    public boolean waitElementNotPresent(By by, String errorMessage, long timeInSecond) {
+        WebDriverWait wait = new WebDriverWait(ad, timeInSecond);
+        wait.withMessage(errorMessage + "\n");
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+
+    public WebElement waitElementPresent(By by, String errorMessage) {
+        return waitElementPresent(by, errorMessage, 10);
+    }
+
+    public boolean waitElementNotPresent(By by, String errorMessage) {
+        return waitElementNotPresent(by, errorMessage, 10);
     }
 
     public WebElement waitElementAndTap(By by, String errorMessage) {
-        WebElement element = waitElement(by, errorMessage, 10);
+        WebElement element = waitElementPresent(by, errorMessage, 10);
         element.click();
         return element;
     }
 
     public WebElement waitElementAndClear(By by, String errorMessage) {
-        WebElement element = waitElement(by, errorMessage, 10);
+        WebElement element = waitElementPresent(by, errorMessage, 10);
         element.clear();
         return element;
     }
 
     public WebElement waitElementAndSendKeys(By by, String sendKeys, String errorMessage) {
-        WebElement element = waitElement(by, errorMessage, 10);
+        WebElement element = waitElementPresent(by, errorMessage, 10);
         element.sendKeys(sendKeys);
         return element;
     }
@@ -89,7 +98,7 @@ public class MainPageObject {
         int alreadySwiped = 0;
         while (ad.findElements(by).size() == 0) {
             if (alreadySwiped > maxSwipes) {
-                waitElement(by, "Cannot swipe page to element", 0);
+                waitElementPresent(by, "Cannot swipe page to element", 0);
                 return;
             }
             swipeUpQuick();
@@ -98,7 +107,7 @@ public class MainPageObject {
     }
 
     public void swipeToLeft(By by, String errorMessage) {
-        WebElement element = waitElement(by, errorMessage, 10);
+        WebElement element = waitElementPresent(by, errorMessage, 10);
 
         int left_x = element.getLocation().getX();
         int right_x = left_x + element.getSize().getWidth();
@@ -122,7 +131,7 @@ public class MainPageObject {
     }
 
     public String waitForElementAndGetAttribute(By by, String attribute, String errorMessage, long timeOutInSeconds) {
-        WebElement element = waitElement(by, errorMessage, timeOutInSeconds);
+        WebElement element = waitElementPresent(by, errorMessage, timeOutInSeconds);
         return element.getAttribute(attribute);
     }
 }
