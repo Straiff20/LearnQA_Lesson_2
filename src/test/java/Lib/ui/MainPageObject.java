@@ -1,7 +1,7 @@
 package Lib.ui;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
@@ -15,16 +15,16 @@ import java.util.List;
 
 public class MainPageObject {
 
-    protected AndroidDriver ad;
+    protected AppiumDriver appiumDriver;
 
-    public MainPageObject(AndroidDriver ad) {
-        this.ad = ad;
+    public MainPageObject(AppiumDriver appiumDriver) {
+        this.appiumDriver = appiumDriver;
     }
 
     public String getAndCheckTitleOfArticle() {
-        ad.getContextHandles();
-        ad.context("WEBVIEW");
-        return ad.getTitle();
+        appiumDriver.getContextHandles();
+        appiumDriver.context("WEBVIEW");
+        return appiumDriver.getTitle();
     }
 
     public void onboardingSkip() {
@@ -33,18 +33,18 @@ public class MainPageObject {
     }
 
     public void touchDisplay() {
-        TouchAction touchAction = new TouchAction(ad);
+        TouchAction touchAction = new TouchAction(appiumDriver);
         touchAction.tap(PointOption.point(570, 1));
     }
 
     public WebElement waitElementPresent(By by, String errorMessage, long timeInSecond) {
-        WebDriverWait wait = new WebDriverWait(ad, timeInSecond);
+        WebDriverWait wait = new WebDriverWait(appiumDriver, timeInSecond);
         wait.withMessage(errorMessage + "\n");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     public boolean waitElementNotPresent(By by, String errorMessage, long timeInSecond) {
-        WebDriverWait wait = new WebDriverWait(ad, timeInSecond);
+        WebDriverWait wait = new WebDriverWait(appiumDriver, timeInSecond);
         wait.withMessage(errorMessage + "\n");
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
@@ -77,8 +77,8 @@ public class MainPageObject {
 
     public void swipeUp(int timeOfSwipe) {
 
-        TouchAction action = new TouchAction(ad);
-        Dimension size = ad.manage().window().getSize();
+        TouchAction action = new TouchAction(appiumDriver);
+        Dimension size = appiumDriver.manage().window().getSize();
         int x = size.width / 2;
         int start_y = (int) (size.height * 0.8);
         int end_y = (int) (size.height * 0.2);
@@ -96,7 +96,7 @@ public class MainPageObject {
 
     public void swipeToElement(By by, String errorMessage, int maxSwipes) {
         int alreadySwiped = 0;
-        while (ad.findElements(by).size() == 0) {
+        while (appiumDriver.findElements(by).size() == 0) {
             if (alreadySwiped > maxSwipes) {
                 waitElementPresent(by, "Cannot swipe page to element", 0);
                 return;
@@ -115,8 +115,8 @@ public class MainPageObject {
         int lower_y = upper_y + element.getSize().getHeight();
         int middle_y = (upper_y + lower_y) / 2;
 
-        TouchAction action = new TouchAction(ad);
-        Dimension size = ad.manage().window().getSize();
+        TouchAction action = new TouchAction(appiumDriver);
+        Dimension size = appiumDriver.manage().window().getSize();
         action
                 .press(PointOption.point(right_x - 1, middle_y))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(250)))
@@ -126,7 +126,7 @@ public class MainPageObject {
     }
 
     public int getAmountsOfElements(By by) {
-        List elements = ad.findElements(by);
+        List elements = appiumDriver.findElements(by);
         return elements.size();
     }
 

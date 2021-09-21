@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="testSearch" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-09-20T12:03:11" hostname="MacBook-Pro-Ivan-2.local" time="77.044">
+<testsuite name="testSearch" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-21T14:37:25" hostname="MacBook-Pro-Ivan-2.local" time="12.317">
   <properties/>
-  <testcase name="searchWordAndCheckAnswerTest()" classname="testSearch" time="12.603"/>
-  <testcase name="assertTitleTest()" classname="testSearch" time="16.841"/>
-  <testcase name="saveTwoArticlesTest()" classname="testSearch" time="35.196"/>
-  <testcase name="searchWordCheckAndClearTest()" classname="testSearch" time="12.404"/>
+  <testcase name="searchWordAndCheckAnswerTest()" classname="testSearch" time="12.317"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[сен 20, 2021 3:03:18 PM io.appium.java_client.remote.AppiumCommandExecutor$1 lambda$0
-INFO: Detected dialect: W3C
-сен 20, 2021 3:03:30 PM io.appium.java_client.remote.AppiumCommandExecutor$1 lambda$0
-INFO: Detected dialect: W3C
-сен 20, 2021 3:03:46 PM io.appium.java_client.remote.AppiumCommandExecutor$1 lambda$0
-INFO: Detected dialect: W3C
-сен 20, 2021 3:04:22 PM io.appium.java_client.remote.AppiumCommandExecutor$1 lambda$0
+  <system-err><![CDATA[сен 21, 2021 5:37:32 PM io.appium.java_client.remote.AppiumCommandExecutor$1 lambda$0
 INFO: Detected dialect: W3C
 ]]></system-err>
 </testsuite>

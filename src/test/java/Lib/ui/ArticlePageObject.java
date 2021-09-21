@@ -53,7 +53,7 @@ public class ArticlePageObject extends MainPageObject {
         this.waitElementAndSendKeys(By.id(NEW_GROUP_INPUT), "Test", "Cannot find and send keys to input for new group");
         this.waitElementAndTap(By.id(ADD_GROUP_NAME_OK_BUTTON), "Cannot find jk button");
         this.waitElementPresent(By.id(CREATE_NEW_GROUP_SUCCESS_POP_UP), "Cannot find success pop up");
-        ad.navigate().back();
+        appiumDriver.navigate().back();
     }
 
     public void tapToArticleAndSaveToGroup(String articleElement) {
@@ -62,8 +62,8 @@ public class ArticlePageObject extends MainPageObject {
         this.waitElementAndTap(By.id(ADD_TO_CREATE_GROUP), "Cannot find and tap to add read list");
         this.waitElementAndTap(By.xpath(NAME_GROUP_WITH_ARTICLES), "Cannot find create group");
         this.waitElementPresent(By.id(CREATE_NEW_GROUP_SUCCESS_POP_UP), "Cannot find success pop up");
-        ad.navigate().back();
-        ad.hideKeyboard();
+        appiumDriver.navigate().back();
+        appiumDriver.hideKeyboard();
         this.waitElementAndTap(By.xpath(ANDROID_NAVIGATE_BUTTON_UP), "Cannot find and tap to android navigate button up");
 
     }
