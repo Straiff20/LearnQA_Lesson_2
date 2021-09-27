@@ -1,6 +1,6 @@
 package Lib.ui;
 
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 
@@ -24,8 +24,8 @@ public class ArticlePageObject extends MainPageObject {
             ARTICLE_FOR_SWIPE = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[3]",
             ELEMENT_UNDO = "//*[contains(@text, 'UNDO')]";
 
-    public ArticlePageObject(AndroidDriver ad) {
-        super(ad);
+    public ArticlePageObject(AppiumDriver appiumDriver) {
+        super(appiumDriver);
     }
 
     /* TEMPLATES METHODS*/

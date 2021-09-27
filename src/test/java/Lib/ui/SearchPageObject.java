@@ -1,6 +1,6 @@
 package Lib.ui;
 
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
 public class SearchPageObject extends MainPageObject {
@@ -11,8 +11,8 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_CLOSE_BUTTON = "org.wikipedia:id/search_close_btn",
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='{SUBSTRING}']";
 
-    public SearchPageObject(AndroidDriver ad) {
-        super(ad);
+    public SearchPageObject(AppiumDriver appiumDriver) {
+        super(appiumDriver);
     }
     /* TEMPLATES METHODS*/
 
