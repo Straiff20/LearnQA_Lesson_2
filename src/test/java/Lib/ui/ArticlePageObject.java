@@ -53,7 +53,7 @@ public class ArticlePageObject extends MainPageObject {
         this.waitElementAndSendKeys(NEW_GROUP_INPUT, "Test", "Cannot find and send keys to input for new group");
         this.waitElementAndTap(ADD_GROUP_NAME_OK_BUTTON, "Cannot find jk button");
         this.waitElementPresent(CREATE_NEW_GROUP_SUCCESS_POP_UP, "Cannot find success pop up");
-        appiumDriver.navigate().back();
+        driver.navigate().back();
     }
 
     public void tapToArticleAndSaveToGroup(String articleElement) {
@@ -62,8 +62,8 @@ public class ArticlePageObject extends MainPageObject {
         this.waitElementAndTap(ADD_TO_CREATE_GROUP, "Cannot find and tap to add read list");
         this.waitElementAndTap(NAME_GROUP_WITH_ARTICLES, "Cannot find create group");
         this.waitElementPresent(CREATE_NEW_GROUP_SUCCESS_POP_UP, "Cannot find success pop up");
-        appiumDriver.navigate().back();
-        appiumDriver.hideKeyboard();
+        driver.navigate().back();
+        driver.hideKeyboard();
         this.waitElementAndTap(ANDROID_NAVIGATE_BUTTON_UP, "Cannot find and tap to android navigate button up");
 
     }
@@ -90,15 +90,15 @@ public class ArticlePageObject extends MainPageObject {
                 "text",
                 "Cannot get attribute of text title");
 
-        appiumDriver.rotate(ScreenOrientation.LANDSCAPE);
+        driver.rotate(ScreenOrientation.LANDSCAPE);
 
         String articleAfterRotateToLandscape = this.waitForElementAndGetAttribute(getArticleName(articleName),
-                "id",
+                "text",
                 "Cannot get attribute of text title after rotate to landscape");
 
         Assertions.assertEquals(articleBeforeRotate, articleAfterRotateToLandscape, "Articles not equals");
 
-        appiumDriver.rotate(ScreenOrientation.PORTRAIT);
+        driver.rotate(ScreenOrientation.PORTRAIT);
 
         String articleAfterRotateToOrigin = this.waitForElementAndGetAttribute(getArticleName(articleName),
                 "text",

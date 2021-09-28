@@ -15,28 +15,28 @@ import java.util.List;
 
 public class MainPageObject {
 
-    protected AppiumDriver appiumDriver;
+    protected AppiumDriver driver;
 
-    public MainPageObject(AppiumDriver appiumDriver) {
-        this.appiumDriver = appiumDriver;
+    public MainPageObject(AppiumDriver driver) {
+        this.driver = driver;
     }
 
     public String getAndCheckTitleOfArticle() {
-        appiumDriver.getContextHandles();
-        appiumDriver.context("WEBVIEW");
-        return appiumDriver.getTitle();
+        driver.getContextHandles();
+        driver.context("WEBVIEW");
+        return driver.getTitle();
     }
 
     public WebElement waitElementPresent(String locator, String errorMessage, long timeInSecond) {
         By by = this.getLocatorByString(locator);
-        WebDriverWait wait = new WebDriverWait(appiumDriver, timeInSecond);
+        WebDriverWait wait = new WebDriverWait(driver, timeInSecond);
         wait.withMessage(errorMessage + "\n");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     public boolean waitElementNotPresent(String locator, String errorMessage, long timeInSecond) {
         By by = this.getLocatorByString(locator);
-        WebDriverWait wait = new WebDriverWait(appiumDriver, timeInSecond);
+        WebDriverWait wait = new WebDriverWait(driver, timeInSecond);
         wait.withMessage(errorMessage + "\n");
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
@@ -68,8 +68,8 @@ public class MainPageObject {
     }
 
     public void swipeUp(int timeOfSwipe) {
-        TouchAction action = new TouchAction(appiumDriver);
-        Dimension size = appiumDriver.manage().window().getSize();
+        TouchAction action = new TouchAction(driver);
+        Dimension size = driver.manage().window().getSize();
         int x = size.width / 2;
         int start_y = (int) (size.height * 0.8);
         int end_y = (int) (size.height * 0.2);
@@ -88,7 +88,7 @@ public class MainPageObject {
     public void swipeToElement(String locator, String errorMessage, int maxSwipes) {
         By by = this.getLocatorByString(locator);
         int alreadySwiped = 0;
-        while (appiumDriver.findElements(by).size() == 0) {
+        while (driver.findElements(by).size() == 0) {
             if (alreadySwiped > maxSwipes) {
                 waitElementPresent(locator, "Cannot swipe page to element", 0);
                 return;
@@ -107,8 +107,8 @@ public class MainPageObject {
         int lower_y = upper_y + element.getSize().getHeight();
         int middle_y = (upper_y + lower_y) / 2;
 
-        TouchAction action = new TouchAction(appiumDriver);
-        Dimension size = appiumDriver.manage().window().getSize();
+        TouchAction action = new TouchAction(driver);
+        Dimension size = driver.manage().window().getSize();
         action
                 .press(PointOption.point(right_x - 1, middle_y))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(250)))
@@ -119,7 +119,7 @@ public class MainPageObject {
 
     public int getAmountsOfElements(String locator) {
         By by = this.getLocatorByString(locator);
-        List elements = appiumDriver.findElements(by);
+        List elements = driver.findElements(by);
         return elements.size();
     }
 

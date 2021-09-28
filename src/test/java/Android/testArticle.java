@@ -9,13 +9,13 @@ public class testArticle extends CoreTestCase {
 
     @Test
     public void saveTwoArticlesTest() {
-        SearchPageObject searchPageObject = new SearchPageObject(appiumDriver);
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
 
         searchPageObject.findAndTapSearchInput();
         searchPageObject.sendKeysToSearchInput("Java");
         searchPageObject.waitForSearchResult("Java (programming language)");
 
-        ArticlePageObject articlePageObject = new ArticlePageObject(appiumDriver);
+        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
 
         articlePageObject.createGroupAndAddArticle("Java (programming language");
         searchPageObject.waitForSearchResult("JavaScript");
@@ -26,12 +26,12 @@ public class testArticle extends CoreTestCase {
 
     @Test
     public void assertTitleTest() {
-        SearchPageObject searchPageObject = new SearchPageObject(appiumDriver);
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
 
         searchPageObject.findAndTapSearchInput();
         searchPageObject.sendKeysToSearchInput("Java");
 
-        ArticlePageObject articlePageObject = new ArticlePageObject(appiumDriver);
+        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
 
         articlePageObject.openArticle("JavaScript");
         articlePageObject.getTitleOfArticle();
@@ -39,12 +39,12 @@ public class testArticle extends CoreTestCase {
 
     @Test
     public void checkArticleAfterRotate() {
-        SearchPageObject searchPageObject = new SearchPageObject(appiumDriver);
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
 
         searchPageObject.findAndTapSearchInput();
         searchPageObject.sendKeysToSearchInput("Java");
 
-        ArticlePageObject articlePageObject = new ArticlePageObject(appiumDriver);
+        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
         articlePageObject.openArticle("JavaScript");
 
         articlePageObject.getAttributeRotateAndAssertAttribute("JavaScript");

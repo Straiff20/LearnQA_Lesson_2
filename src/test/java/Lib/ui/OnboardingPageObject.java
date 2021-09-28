@@ -4,8 +4,8 @@ import io.appium.java_client.AppiumDriver;
 
 public class OnboardingPageObject extends MainPageObject {
 
-    public OnboardingPageObject(AppiumDriver appiumDriver) {
-        super(appiumDriver);
+    public OnboardingPageObject(AppiumDriver driver) {
+        super(driver);
     }
 
     private static final String

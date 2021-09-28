@@ -8,7 +8,7 @@ public class testSearch extends CoreTestCase {
 
     @Test
     public void searchWordAndCheckAnswerTest() {
-        SearchPageObject searchPageObject = new SearchPageObject(appiumDriver);
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
 
         searchPageObject.findAndTapSearchInput();
         searchPageObject.sendKeysToSearchInput("Java");
@@ -17,7 +17,7 @@ public class testSearch extends CoreTestCase {
 
     @Test
     public void searchWordCheckAndClearTest() {
-        SearchPageObject searchPageObject = new SearchPageObject(appiumDriver);
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
 
         searchPageObject.findAndTapSearchInput();
         searchPageObject.sendKeysToSearchInput("Appium");

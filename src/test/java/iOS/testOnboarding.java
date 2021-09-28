@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Test;
 public class testOnboarding extends CoreTestCase {
     @Test
     public void onboardingPathTest() {
-        OnboardingPageObject onboardingPageObject = new OnboardingPageObject(appiumDriver);
+        if (this.Platform.isAndroid()) {
+            return;
+        }
+
+        OnboardingPageObject onboardingPageObject = new OnboardingPageObject(driver);
 
         onboardingPageObject.waitFistOnboardingPage();
 

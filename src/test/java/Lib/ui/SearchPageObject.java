@@ -11,8 +11,8 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_CLOSE_BUTTON = "id:org.wikipedia:id/search_close_btn",
             SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='{SUBSTRING}']";
 
-    public SearchPageObject(AppiumDriver appiumDriver) {
-        super(appiumDriver);
+    public SearchPageObject(AppiumDriver driver) {
+        super(driver);
     }
     /* TEMPLATES METHODS*/
 
