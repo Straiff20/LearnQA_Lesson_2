@@ -5,6 +5,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
@@ -26,6 +27,7 @@ public class CoreTestCase extends TestCase {
         DesiredCapabilities capabilities = this.getCapabilitiesByPlatformEnv();
 
         appiumDriver = new AppiumDriver(new URL(AppiumURL), capabilities);
+        appiumDriver.rotate(ScreenOrientation.PORTRAIT);
     }
 
     @AfterEach
