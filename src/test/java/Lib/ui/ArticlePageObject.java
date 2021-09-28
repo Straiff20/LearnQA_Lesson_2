@@ -2,6 +2,7 @@ package Lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.ScreenOrientation;
 
 
 public class ArticlePageObject extends MainPageObject {
@@ -82,5 +83,27 @@ public class ArticlePageObject extends MainPageObject {
 
     public void getTitleOfArticle() {
         Assertions.assertNotNull(this.getAndCheckTitleOfArticle());
+    }
+
+    public void getAttributeRotateAndAssertAttribute(String articleName) {
+        String articleBeforeRotate = this.waitForElementAndGetAttribute(getArticleName(articleName),
+                "text",
+                "Cannot get attribute of text title");
+
+        appiumDriver.rotate(ScreenOrientation.LANDSCAPE);
+
+        String articleAfterRotateToLandscape = this.waitForElementAndGetAttribute(getArticleName(articleName),
+                "id",
+                "Cannot get attribute of text title after rotate to landscape");
+
+        Assertions.assertEquals(articleBeforeRotate, articleAfterRotateToLandscape, "Articles not equals");
+
+        appiumDriver.rotate(ScreenOrientation.PORTRAIT);
+
+        String articleAfterRotateToOrigin = this.waitForElementAndGetAttribute(getArticleName(articleName),
+                "text",
+                "Cannot get attribute of text title after rotate to origin");
+
+        Assertions.assertEquals(articleAfterRotateToLandscape, articleAfterRotateToOrigin, "Articles not equals");
     }
 }

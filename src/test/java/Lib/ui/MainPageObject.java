@@ -27,24 +27,15 @@ public class MainPageObject {
         return appiumDriver.getTitle();
     }
 
-//    public void onboardingSkip(String locator) {
-//        waitElementAndTap(locator,"SkipButton not found");
-//    }
-
-    public void touchDisplay() {
-        TouchAction touchAction = new TouchAction(appiumDriver);
-        touchAction.tap(PointOption.point(570, 1));
-    }
-
     public WebElement waitElementPresent(String locator, String errorMessage, long timeInSecond) {
-        By by = this.getLocatorByString(locator );
+        By by = this.getLocatorByString(locator);
         WebDriverWait wait = new WebDriverWait(appiumDriver, timeInSecond);
         wait.withMessage(errorMessage + "\n");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     public boolean waitElementNotPresent(String locator, String errorMessage, long timeInSecond) {
-        By by = this.getLocatorByString(locator );
+        By by = this.getLocatorByString(locator);
         WebDriverWait wait = new WebDriverWait(appiumDriver, timeInSecond);
         wait.withMessage(errorMessage + "\n");
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
@@ -95,7 +86,7 @@ public class MainPageObject {
     }
 
     public void swipeToElement(String locator, String errorMessage, int maxSwipes) {
-        By by = this.getLocatorByString(locator );
+        By by = this.getLocatorByString(locator);
         int alreadySwiped = 0;
         while (appiumDriver.findElements(by).size() == 0) {
             if (alreadySwiped > maxSwipes) {
@@ -127,13 +118,13 @@ public class MainPageObject {
     }
 
     public int getAmountsOfElements(String locator) {
-        By by = this.getLocatorByString(locator );
+        By by = this.getLocatorByString(locator);
         List elements = appiumDriver.findElements(by);
         return elements.size();
     }
 
-    public String waitForElementAndGetAttribute(String locator, String attribute, String errorMessage, long timeOutInSeconds) {
-        WebElement element = waitElementPresent(locator, errorMessage, timeOutInSeconds);
+    public String waitForElementAndGetAttribute(String locator, String attribute, String errorMessage) {
+        WebElement element = waitElementPresent(locator, errorMessage, 10);
         return element.getAttribute(attribute);
     }
 

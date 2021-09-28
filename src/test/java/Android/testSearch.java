@@ -1,3 +1,5 @@
+package Android;
+
 import Lib.CoreTestCase;
 import Lib.ui.SearchPageObject;
 import org.junit.jupiter.api.Test;

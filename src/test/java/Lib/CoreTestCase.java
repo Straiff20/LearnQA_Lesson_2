@@ -12,7 +12,7 @@ import java.net.URL;
 public class CoreTestCase extends TestCase {
 
     private static final String PLATFORM_IOS = "ios";
-    public static final String PLATFORM_ANDROID = "android";
+    private static final String PLATFORM_ANDROID = "android";
 
     protected AppiumDriver appiumDriver;
     private static String AppiumURL = "http://127.0.0.1:4723/wd/hub";

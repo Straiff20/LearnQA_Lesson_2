@@ -1,3 +1,5 @@
+package Android;
+
 import Lib.CoreTestCase;
 import Lib.ui.ArticlePageObject;
 import Lib.ui.SearchPageObject;
@@ -33,5 +35,18 @@ public class testArticle extends CoreTestCase {
 
         articlePageObject.openArticle("JavaScript");
         articlePageObject.getTitleOfArticle();
+    }
+
+    @Test
+    public void checkArticleAfterRotate() {
+        SearchPageObject searchPageObject = new SearchPageObject(appiumDriver);
+
+        searchPageObject.findAndTapSearchInput();
+        searchPageObject.sendKeysToSearchInput("Java");
+
+        ArticlePageObject articlePageObject = new ArticlePageObject(appiumDriver);
+        articlePageObject.openArticle("JavaScript");
+
+        articlePageObject.getAttributeRotateAndAssertAttribute("JavaScript");
     }
 }
