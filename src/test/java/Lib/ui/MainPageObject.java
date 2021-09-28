@@ -27,56 +27,56 @@ public class MainPageObject {
         return appiumDriver.getTitle();
     }
 
-    public void onboardingSkip() {
-        String skipButton = "org.wikipedia:id/fragment_onboarding_skip_button";
-        waitElementAndTap(By.id(skipButton), "SkipButton not found" + skipButton);
-    }
+//    public void onboardingSkip(String locator) {
+//        waitElementAndTap(locator,"SkipButton not found");
+//    }
 
     public void touchDisplay() {
         TouchAction touchAction = new TouchAction(appiumDriver);
         touchAction.tap(PointOption.point(570, 1));
     }
 
-    public WebElement waitElementPresent(By by, String errorMessage, long timeInSecond) {
+    public WebElement waitElementPresent(String locator, String errorMessage, long timeInSecond) {
+        By by = this.getLocatorByString(locator );
         WebDriverWait wait = new WebDriverWait(appiumDriver, timeInSecond);
         wait.withMessage(errorMessage + "\n");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    public boolean waitElementNotPresent(By by, String errorMessage, long timeInSecond) {
+    public boolean waitElementNotPresent(String locator, String errorMessage, long timeInSecond) {
+        By by = this.getLocatorByString(locator );
         WebDriverWait wait = new WebDriverWait(appiumDriver, timeInSecond);
         wait.withMessage(errorMessage + "\n");
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
-    public WebElement waitElementPresent(By by, String errorMessage) {
-        return waitElementPresent(by, errorMessage, 10);
+    public WebElement waitElementPresent(String locator, String errorMessage) {
+        return waitElementPresent(locator, errorMessage, 10);
     }
 
-    public boolean waitElementNotPresent(By by, String errorMessage) {
-        return waitElementNotPresent(by, errorMessage, 10);
+    public boolean waitElementNotPresent(String locator, String errorMessage) {
+        return waitElementNotPresent(locator, errorMessage, 10);
     }
 
-    public WebElement waitElementAndTap(By by, String errorMessage) {
-        WebElement element = waitElementPresent(by, errorMessage, 10);
+    public WebElement waitElementAndTap(String locator, String errorMessage) {
+        WebElement element = waitElementPresent(locator, errorMessage, 10);
         element.click();
         return element;
     }
 
-    public WebElement waitElementAndClear(By by, String errorMessage) {
-        WebElement element = waitElementPresent(by, errorMessage, 10);
+    public WebElement waitElementAndClear(String locator, String errorMessage) {
+        WebElement element = waitElementPresent(locator, errorMessage, 10);
         element.clear();
         return element;
     }
 
-    public WebElement waitElementAndSendKeys(By by, String sendKeys, String errorMessage) {
-        WebElement element = waitElementPresent(by, errorMessage, 10);
+    public WebElement waitElementAndSendKeys(String locator, String sendKeys, String errorMessage) {
+        WebElement element = waitElementPresent(locator, errorMessage, 10);
         element.sendKeys(sendKeys);
         return element;
     }
 
     public void swipeUp(int timeOfSwipe) {
-
         TouchAction action = new TouchAction(appiumDriver);
         Dimension size = appiumDriver.manage().window().getSize();
         int x = size.width / 2;
@@ -94,11 +94,12 @@ public class MainPageObject {
         swipeUp(200);
     }
 
-    public void swipeToElement(By by, String errorMessage, int maxSwipes) {
+    public void swipeToElement(String locator, String errorMessage, int maxSwipes) {
+        By by = this.getLocatorByString(locator );
         int alreadySwiped = 0;
         while (appiumDriver.findElements(by).size() == 0) {
             if (alreadySwiped > maxSwipes) {
-                waitElementPresent(by, "Cannot swipe page to element", 0);
+                waitElementPresent(locator, "Cannot swipe page to element", 0);
                 return;
             }
             swipeUpQuick();
@@ -106,8 +107,8 @@ public class MainPageObject {
         }
     }
 
-    public void swipeToLeft(By by, String errorMessage) {
-        WebElement element = waitElementPresent(by, errorMessage, 10);
+    public void swipeToLeft(String locator, String errorMessage) {
+        WebElement element = waitElementPresent(locator, errorMessage, 10);
 
         int left_x = element.getLocation().getX();
         int right_x = left_x + element.getSize().getWidth();
@@ -125,13 +126,28 @@ public class MainPageObject {
                 .perform();
     }
 
-    public int getAmountsOfElements(By by) {
+    public int getAmountsOfElements(String locator) {
+        By by = this.getLocatorByString(locator );
         List elements = appiumDriver.findElements(by);
         return elements.size();
     }
 
-    public String waitForElementAndGetAttribute(By by, String attribute, String errorMessage, long timeOutInSeconds) {
-        WebElement element = waitElementPresent(by, errorMessage, timeOutInSeconds);
+    public String waitForElementAndGetAttribute(String locator, String attribute, String errorMessage, long timeOutInSeconds) {
+        WebElement element = waitElementPresent(locator, errorMessage, timeOutInSeconds);
         return element.getAttribute(attribute);
+    }
+
+    private By getLocatorByString(String locatorWithType) {
+        String[] explodedLocator = locatorWithType.split(":", 2);
+        String byType = explodedLocator[0];
+        String locator = explodedLocator[1];
+
+        if (byType.equals("xpath")) {
+            return By.xpath(locator);
+        } else if (byType.equals("id")) {
+            return By.id(locator);
+        } else {
+            throw new IllegalArgumentException("Cannot get type or locator. Locator " + locatorWithType);
+        }
     }
 }
